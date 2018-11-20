@@ -1,0 +1,97 @@
+﻿body {
+	background: white;
+	color: black;
+	font-family: 'Montserrat', sans-serif;
+}
+h1,
+h2 {
+	font-weight: bold;
+}
+
+.navbar {
+    background: #27A967;
+    margin-bottom: 0;
+}
+.jumbotron {
+    background: #27A967;
+    color: black;
+    text-align: center;
+}
+    .jumbotron p {
+        color: black;
+        font-size: 26px;
+    }
+
+.dropdown-menu {
+    background: white;
+    border-radius: 0;
+    border: 0;
+}
+.navbar-inverse .navbar-nav li a {
+	color: #f7f7f7;
+	font-size: 16px;
+}
+.navbar-inverse .navbar-nav li a:hover {
+	background: black;
+    border-radius: 5px;
+}
+.navbar-inverse .navbar-nav .dropdown-menu li a:hover {
+	background: #2C463C;
+}
+.dropdown-menu li a {
+	padding: 10px;
+}
+.btn-default {
+    color: #333;
+    background-color: #d4d4d4;
+    border-color: #8c8c8c;
+}
+.btn-default:hover {
+    color: white;
+    background-color: black;
+    border-color: green;
+}
+.btn-primary {
+    color: black;
+    background-color: transparent;
+    border-color: black;
+    margin-bottom: 5px;
+}
+.btn-primary:hover {
+    color: #27A967;
+    background-color: black;
+    border-color: black;
+}
+.glyphicon-large {
+	font-size: 100px;
+}
+.call-to-action {
+	text-align: center;
+}
+.call-to-action p {
+	margin-bottom: 30px;
+	font-family: sans-serif;
+}
+.navbar-inverse .navbar-brand {
+    color: white;
+    font-size: 16px;
+}
+.navbar-inverse .navbar-brand:hover{
+    background: black;
+    border-radius: 5px;
+}
+.navbar-inverse .btn-link {
+    color: white;
+    font-size: 16px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    padding-top: 12px;
+    padding-bottom: 14px;
+}
+.navbar-inverse .btn-link:hover {
+    background: black;
+    border-radius: 5px;
+}
+.btn-link:hover {
+    text-decoration: none;
+}

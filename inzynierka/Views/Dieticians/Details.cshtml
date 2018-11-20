@@ -1,0 +1,54 @@
+﻿@model inzynierka.Models.ApplicationUser
+
+@{
+    ViewData["Title"] = "Szczegóły";
+}
+
+<h2>Szczegóły </h2>
+
+<div>
+    <h4>Dietetyk</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Surname)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Surname)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.AddeDateTime)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.AddeDateTime)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Age)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Age)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.PhoneNumber)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.PhoneNumber)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a class="btn btn-default" asp-action="Edit" asp-route-id="@Model.Id">Edytuj</a> |
+    <a class="btn btn-default" asp-action="Index">Powrót do poprzedniego menu</a>
+</div>
