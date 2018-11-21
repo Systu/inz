@@ -12,88 +12,64 @@
 <table class="table" id="IndexTable">
     <thead>
         <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model[0].Name)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model[0].Surname)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model[0].AddeDateTime)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model[0].Age)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model[0].Email)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model[0].PhoneNumber)
-                </th>
+            <th>
+                @Html.DisplayNameFor(model => model[0].Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model[0].Surname)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model[0].AddeDateTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model[0].Age)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model[0].Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model[0].PhoneNumber)
+            </th>
 
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Surname)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.AddeDateTime)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Age)
-            </td> 
-            <td>
-                @Html.DisplayFor(modelItem => item.Email)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PhoneNumber)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edytuj</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Szczegóły</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Usuń</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Surname)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AddeDateTime)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Age)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PhoneNumber)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edytuj</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">Szczegóły</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Usuń</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
 
-@section head {         
+@section head {
     <link href="~/css/Datatable.css" rel="stylesheet" />
 }
 @section Scripts {
-    <script src="js/Datatable.js"></script>
-    <script>
-        $('#IndexTable').DataTable( {
-            language: {
-                processing:    "Przetwarzanie",
-                search:        "Szukaj:",
-                lengthMenu:    "Pokaż _MENU_ wyników",
-                info:           "Pokazuje od _START_ do _END_ z _TOTAL_ wyników",
-                infoEmpty:      "Brak wyników do wyświetlenia",
-                infoFiltered:   "(Przefiltrowano z _MAX_ rekordu)",
-                infoPostFix:    "",
-                loadingRecords: "Ładowanie Rekordów",
-                zeroRecords:    "Tabela jest pusta",
-                emptyTable:     "Tabela jest pusta",
-                paginate: {
-                    first:      "Pierwsza",
-                    previous:   "Poprzednia",
-                    next:       "Następna",
-                    last:       "Ostatnia"
-                },
-                aria: {
-                    sortAscending:  ": Aktywne sortowanie rosnąco",
-                    sortDescending: ": Aktywne sortowanie malejąco"
-                }
-            }
-        } );
-    </script>
+    <script src="~/js/Datatable.js"></script>
+    <script src="~/js/ButifyIndexTable.js"></script>
 }

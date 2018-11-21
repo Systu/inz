@@ -4,170 +4,78 @@
     ViewData["Title"] = "Index";
 }
 
-<h2>Index</h2>
+<h2>Lista twoich klientów</h2>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create" class="btn btn-default">Dodaj nowego klienta</a>
 </p>
 <table class="table">
     <thead>
         <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.Name)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Surname)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.AddeDateTime)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.DietLenght)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.ConsultationCount)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.PlannedWeight)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Age)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Height)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.DieticianId)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.DietId)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.UserName)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.NormalizedUserName)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Email)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.NormalizedEmail)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.EmailConfirmed)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.PasswordHash)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.SecurityStamp)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.ConcurrencyStamp)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.PhoneNumber)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.PhoneNumberConfirmed)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.TwoFactorEnabled)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.LockoutEnd)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.LockoutEnabled)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.AccessFailedCount)
-                </th>
+            <th>
+                @Html.DisplayNameFor(model => model[0].Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model[0].Surname)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model[0].AddeDateTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model[0].DietLenght)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model[0].DietName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model[0].ConsultationCount)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model[0].PlannedWeight)
+            </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Surname)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.AddeDateTime)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DietLenght)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ConsultationCount)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PlannedWeight)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Age)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Height)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DieticianId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DietId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.UserName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NormalizedUserName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Email)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NormalizedEmail)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.EmailConfirmed)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PasswordHash)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.SecurityStamp)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ConcurrencyStamp)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PhoneNumber)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PhoneNumberConfirmed)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TwoFactorEnabled)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.LockoutEnd)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.LockoutEnabled)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.AccessFailedCount)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Surname)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AddeDateTime)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DietLenght)
+                </td>
+                <th>
+                    @Html.DisplayNameFor(model => item.DietName)
+                </th>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ConsultationCount)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PlannedWeight)
+                </td>
+
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
+
+@section head {
+    <link href="~/css/Datatable.css" rel="stylesheet" />
+}
+@section Scripts {
+    <script src="~/js/Datatable.js"></script>
+    <script src="~/js/ButifyIndexTable.js"></script>
+}

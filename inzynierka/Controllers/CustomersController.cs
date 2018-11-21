@@ -53,7 +53,7 @@ namespace inzynierka.Controllers
                         DietLenght = item.DietLenght,
                         ConsultationCount = item.ConsultationCount,
                         PlannedWeight = item.PlannedWeight,
-                        Dietname = diet.DietName
+                        DietName = diet.DietName
                     }).ToList();
         }
         // GET: Customers

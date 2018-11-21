@@ -39,6 +39,6 @@ namespace inzynierka.Models.CustomersViewModels
 
         [Required]
         [Display(Name = "Nazwa diety")]
-        public string Dietname { get; set; }
+        public string DietName { get; set; }
     }
 }
