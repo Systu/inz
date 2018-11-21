@@ -9,6 +9,7 @@ using inzynierka.Data;
 using inzynierka.Models;
 using inzynierka.Models.CustomersViewModels;
 using inzynierka.Services;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Logging;
 
@@ -21,34 +22,44 @@ namespace inzynierka.Controllers
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly IEmailSender _emailSender;
         private readonly ILogger _logger;
+        private readonly IHttpContextAccessor _contextAccessor;
 
         public CustomersController(ApplicationDbContext context, UserManager<ApplicationUser> userManager,
                                    SignInManager<ApplicationUser> signInManager,
                                    IEmailSender emailSender,
-                                   ILogger<AccountController> logger)
+                                   ILogger<AccountController> logger, IHttpContextAccessor contextAccessor)
         {
             _userManager = userManager;
             _context = context;
             _signInManager = signInManager;
             _emailSender = emailSender;
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
+            _contextAccessor = contextAccessor;
         }
         public async Task<List<IndexViewModel>> GetDieticianListAsync()
         {
-            var dieticianList = new List<IndexViewModel>();
-            var user = await _userManager.GetUsersInRoleAsync("Dietician");
-            foreach (var item in user)
-            {
-                var temp = new IndexViewModel { Id = item.Id, Name = item.Name, Surname = item.Surname, Email = item.Email, Age = item.Age, AddeDateTime = item.AddeDateTime, PhoneNumber = item.PhoneNumber };
-                dieticianList.Add(temp);
-            }
+            var user = await _userManager.GetUsersInRoleAsync("Customers");
+            var currentlyLogInUser = _userManager.GetUserAsync(_contextAccessor.HttpContext.User).Result;
 
-            return dieticianList;
+            return (from item in user
+                    where item.DieticianId == currentlyLogInUser.Id
+                    let diet = _context.Diets.FirstOrDefault(x => x.DietId == item.DietId) ?? new Diet {DietName = "brak diety"}
+                    select new IndexViewModel
+                    {
+                        Id = item.Id,
+                        Name = item.Name,
+                        Surname = item.Surname,
+                        AddeDateTime = item.AddeDateTime,
+                        DietLenght = item.DietLenght,
+                        ConsultationCount = item.ConsultationCount,
+                        PlannedWeight = item.PlannedWeight,
+                        Dietname = diet.DietName
+                    }).ToList();
         }
         // GET: Customers
         public async Task<IActionResult> Index()
         {
-            return View(await _context.ApplicationUser.ToListAsync());
+            return View(await GetDieticianListAsync());
         }
 
         // GET: Customers/Details/5

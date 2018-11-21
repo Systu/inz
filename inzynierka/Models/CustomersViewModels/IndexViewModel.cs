@@ -20,22 +20,25 @@ namespace inzynierka.Models.CustomersViewModels
         [Required]
         [Display(Name = "Data Dodania")]
         
-        public DateTime AddeDateTime { get; set; }
+        public DateTime? AddeDateTime { get; set; }
 
 
         [Required]
         [Display(Name = "Długość Diety")]
-        public int DietLenght { get; set; }
+        public int? DietLenght { get; set; }
 
 
         [Required]
         [Display(Name = "Ilość odbytych konsultacji")]
-        public int ConsultationCount { get; set; }
+        public int? ConsultationCount { get; set; }
 
 
         [Required]
         [Display(Name = "Planowana Waga")]
-        public int PlannedWeight { get; set; }
+        public int? PlannedWeight { get; set; }
 
+        [Required]
+        [Display(Name = "Nazwa diety")]
+        public string Dietname { get; set; }
     }
 }
