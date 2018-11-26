@@ -1,0 +1,62 @@
+﻿@model List<inzynierka.Models.DietListViewModels.IndexViewModel>
+
+@{
+    ViewData["Title"] = "Lista diet";
+}
+
+<h2>Lista diet</h2>
+
+<p>
+    <a asp-action="Create" class="btn btn-default">Dodaj nową diete</a>
+</p>
+<table class="table" id="IndexTable">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model[0].DietName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model[0].AddedTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model[0].CustomerCount)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model[0].MealCount)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.DietName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AddedTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CustomerCount)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MealCount)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edytuj</a> |
+                
+                <a asp-action="Delete" asp-route-id="@item.Id">Usuń</a>
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
+
+@section head {
+    <link href="~/css/Datatable.css" rel="stylesheet" />
+}
+@section Scripts {
+    <script src="~/js/Datatable.js"></script>
+    <script src="~/js/ButifyIndexTable.js"></script>
+}

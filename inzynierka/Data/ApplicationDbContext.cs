@@ -22,7 +22,18 @@ namespace inzynierka.Data
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
-          
+            builder.Entity<MealDietList>()
+                .HasKey(t => new { t.MealId, t.DietListId });
+
+            builder.Entity<MealDietList>()
+                .HasOne(pt => pt.Meal)
+                .WithMany(p => p.MealDietList)
+                .HasForeignKey(pt => pt.MealId);
+
+            builder.Entity<MealDietList>()
+                .HasOne(pt => pt.DietList)
+                .WithMany(t => t.MealDietList)
+                .HasForeignKey(pt => pt.DietListId);
         }
         
 

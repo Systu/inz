@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace inzynierka.Models
@@ -13,6 +14,6 @@ namespace inzynierka.Models
         [Display(Name = "Składniki")]
         public string Components { get; set; }
         
-        public Guid DietListId { get; set; }
+        public List<MealDietList> MealDietList { get; set; }
     }
 }

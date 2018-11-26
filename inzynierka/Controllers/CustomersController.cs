@@ -36,7 +36,7 @@ namespace inzynierka.Controllers
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
             _contextAccessor = contextAccessor;
         }
-        public async Task<List<IndexViewModel>> GetDieticianListAsync()
+        public async Task<List<IndexViewModel>> GetCustomersListAsync()
         {
             var user = await _userManager.GetUsersInRoleAsync("Customers");
             var currentlyLogInUser = _userManager.GetUserAsync(_contextAccessor.HttpContext.User).Result;
@@ -56,10 +56,11 @@ namespace inzynierka.Controllers
                         DietName = diet.DietName
                     }).ToList();
         }
+        
         // GET: Customers
         public async Task<IActionResult> Index()
         {
-            return View(await GetDieticianListAsync());
+            return View(await GetCustomersListAsync());
         }
 
         // GET: Customers/Details/5

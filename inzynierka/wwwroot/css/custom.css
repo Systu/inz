@@ -83,8 +83,8 @@ h2 {
 .navbar-inverse .btn-link {
     color: white;
     font-size: 16px;
-    margin-top: 0px;
-    margin-bottom: 0px;
+    margin-top: 0;
+    margin-bottom: 0;
     padding-top: 12px;
     padding-bottom: 14px;
 }
@@ -94,4 +94,7 @@ h2 {
 }
 .btn-link:hover {
     text-decoration: none;
+}
+.Text-area {
+    resize: vertical;
 }

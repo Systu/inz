@@ -18,7 +18,7 @@ namespace inzynierka.Models.DieticiansViewModels
         public string Surname { get; set; }
 
         [Required]
-        [EmailAddress]
+        [EmailAddress(ErrorMessage = "Nieprawidłowy adres email")]
         [Display(Name = "Email")]
         public string Email { get; set; }
 

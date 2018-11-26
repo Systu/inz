@@ -8,13 +8,16 @@ namespace inzynierka.Models.DieticiansViewModels
         public string Id { get; set; }
 
         [Required]
+        [Display(Name = "Imię")]
         public string Name { get; set; }
 
         [Required]
+        [Display(Name = "Nazwisko")]
         public string Surname { get; set; }
 
         [Required]
         [EmailAddress]
+        [Display(Name = "Adres Email")]
         public string Email { get; set; }
 
         [Required]

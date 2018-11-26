@@ -1,18 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Threading.Tasks;
 
-namespace inzynierka.Models
+namespace inzynierka.Models.DietListViewModels
 {
-    public class DietList
+    public class CreateViewModel
     {
         public Guid DietListId { get; set; }
         [Display(Name = "Nazwa diety")]
         public string DietName { get; set; }
-        
-        public DateTime AddedDataTime { get; set; }
+        [Display(Name = "Opis")]
         public string Describe { get; set; }
-
-        public List<MealDietList> MealDietList { get; set; }
+        public DateTime AddeDateTime { get; set; }
     }
 }

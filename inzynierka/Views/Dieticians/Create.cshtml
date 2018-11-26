@@ -37,16 +37,15 @@
                 <input asp-for="PhoneNumber" class="form-control" />
                 <span asp-validation-for="PhoneNumber" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <button type="submit" value="Create" class="btn btn-default" >Dodaj nowego użytkownika</button>
+            <div>
+                <button type="submit" value="Create" class="btn btn-default">Dodaj użytkownika</button>  | 
+                <a asp-action="Index" class="btn btn-default">poprzednie menu </a>
             </div>
         </form>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Wróć do poprzedniego Menu </a>
-</div>
+
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

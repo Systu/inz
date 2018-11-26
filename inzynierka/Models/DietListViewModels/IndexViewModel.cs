@@ -19,7 +19,7 @@ namespace inzynierka.Models.DietListViewModels
 
         [Required]
         [Display(Name = "Data dodania")]
-        public string AddedTime { get; set; }
+        public DateTime AddedTime { get; set; }
 
         [Required]
         [Display(Name = "Ilość posiłków w diecie")]
