@@ -17,6 +17,7 @@ namespace inzynierka.Data
         public DbSet<WeightResult> WeightResults { get; set; }
         public DbSet<Diet> Diets { get; set; }
         public DbSet<DietList> DietLists { get; set; }
+        public DbSet<MealDietList> MealDietLists { get; set; }
         
 
         protected override void OnModelCreating(ModelBuilder builder)

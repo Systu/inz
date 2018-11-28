@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -11,6 +13,7 @@ using inzynierka.Models.DietListViewModels;
 using inzynierka.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore.Extensions.Internal;
 using Microsoft.Extensions.Logging;
 
 namespace inzynierka.Controllers
@@ -46,8 +49,9 @@ namespace inzynierka.Controllers
 
         public async Task<int> GetMealCountPerDietAsync(Guid id)
         {
-            var mealList = await _context.Meals.ToListAsync();
-            return mealList.SelectMany(listitem => listitem.MealDietList).Count(item => item.DietListId == id);
+
+            return await _context.MealDietLists.Where(s => s.DietListId == id).CountAsync();
+
         }
 
         public async Task<List<IndexViewModel>> GetDietListToIndex()
@@ -126,6 +130,7 @@ namespace inzynierka.Controllers
         // GET: DietLists/Edit/5
         public async Task<IActionResult> Edit(Guid? id)
         {
+            
             if (id == null)
             {
                 return NotFound();
@@ -136,7 +141,14 @@ namespace inzynierka.Controllers
             {
                 return NotFound();
             }
-            return View(dietList);
+
+            var model = new EditViewModel()
+            {
+                DietListId = dietList.DietListId,
+                Describe = dietList.Describe,
+                DietName = dietList.DietName
+            };
+            return View(model);
         }
 
         // POST: DietLists/Edit/5
@@ -144,7 +156,7 @@ namespace inzynierka.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(Guid id, [Bind("DietListId,DietName,AddedDataTime")] DietList dietList)
+        public async Task<IActionResult> Edit(Guid id, EditViewModel dietList)
         {
             if (id != dietList.DietListId)
             {
@@ -189,7 +201,14 @@ namespace inzynierka.Controllers
                 return NotFound();
             }
 
-            return View(dietList);
+            var model = new DeleteViewModel
+            {
+                DietListId = dietList.DietListId,
+                Describe = dietList.Describe,
+                DietName = dietList.DietName,
+                AddedTime = dietList.AddedDataTime
+            };
+            return View(model);
         }
 
         // POST: DietLists/Delete/5
@@ -199,6 +218,11 @@ namespace inzynierka.Controllers
         {
             var dietList = await _context.DietLists.SingleOrDefaultAsync(m => m.DietListId == id);
             _context.DietLists.Remove(dietList);
+            var mealWhereDeletedDiet = await _context.MealDietLists.Where(s => s.DietListId == id).ToListAsync();
+            foreach (var item in mealWhereDeletedDiet)
+            {
+                 _context.MealDietLists.Remove(item);
+            }
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
