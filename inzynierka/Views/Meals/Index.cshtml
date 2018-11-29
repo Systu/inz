@@ -1,47 +1,62 @@
-﻿@model IEnumerable<inzynierka.Models.Meal>
+﻿@model List<inzynierka.Models.MealViewModels.IndexViewModel>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Lista posiłków";
 }
 
-<h2>Index</h2>
+<h2>Lista posiłków</h2>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create" class="btn btn-default">Dodaj nowy posiłek</a>
 </p>
-<table class="table">
+<table class="table" id="IndexTable">
     <thead>
         <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.MealName)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.MealType)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Components)
-                </th>
+            <th>
+                @Html.DisplayNameFor(model => model[0].MealName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model[0].MealType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model[0].Components)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model[0].HowManyTimeoccursInDiet)
+            </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.MealName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.MealType)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Components)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.MealId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.MealId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.MealId">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MealName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MealType)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Components)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.HowManyTimeoccursInDiet)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.MealId">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.MealId">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.MealId">Delete</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
+
+@section head {
+    <link href="~/css/Datatable.css" rel="stylesheet" />
+}
+@section Scripts {
+    <script src="~/js/Datatable.js"></script>
+    <script src="~/js/ButifyIndexTable.js"></script>
+}

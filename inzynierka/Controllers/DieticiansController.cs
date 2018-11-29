@@ -34,15 +34,18 @@ namespace inzynierka.Controllers
 
         public async Task<List<IndexViewModel>> GetDieticianListAsync()
         {
-            var dieticianList = new List<IndexViewModel>();
             var user = await _userManager.GetUsersInRoleAsync("Dietician");
-            foreach (var item in user)
-            {
-                var temp = new IndexViewModel { Id = item.Id, Name = item.Name, Surname = item.Surname, Email = item.Email, Age = item.Age, AddeDateTime = item.AddeDateTime, PhoneNumber = item.PhoneNumber};
-                dieticianList.Add(temp);
-            }
 
-            return dieticianList;
+            return user.Select(item => new IndexViewModel
+            {
+                Id = item.Id,
+                Name = item.Name,
+                Surname = item.Surname,
+                Email = item.Email,
+                Age = item.Age,
+                AddeDateTime = item.AddeDateTime,
+                PhoneNumber = item.PhoneNumber
+            }).ToList();
         }
         // GET: ApplicationUsers
         public async Task<IActionResult> Index()

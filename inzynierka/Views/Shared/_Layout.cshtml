@@ -74,6 +74,8 @@
                     {
                         <li><a asp-area="" asp-controller="Customers" asp-action="Index">Klienci</a></li>
                         <li><a asp-area="" asp-controller="DietLists" asp-action="Index">Diety</a> </li>
+                        <li><a asp-area="" asp-controller="Meals" asp-action="Index">Posiłki</a> </li>
+
                     }
                     else if ((await AuthorizationService.AuthorizeAsync(User, "RequireCustomersRole")).Succeeded)
                     {

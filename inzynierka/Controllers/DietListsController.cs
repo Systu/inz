@@ -56,8 +56,9 @@ namespace inzynierka.Controllers
 
         public async Task<List<IndexViewModel>> GetDietListToIndex()
         {
-            var model = new List<IndexViewModel>();
+            
             var indexData = await _context.DietLists.ToListAsync();
+            var model = new List<IndexViewModel>();
             foreach (var item in indexData)
             {
                 var temp = new IndexViewModel

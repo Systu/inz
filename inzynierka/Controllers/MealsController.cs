@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using inzynierka.Data;
 using inzynierka.Models;
+using inzynierka.Models.MealViewModels;
 
 namespace inzynierka.Controllers
 {
@@ -19,10 +19,35 @@ namespace inzynierka.Controllers
             _context = context;
         }
 
+        public async Task<int> HowManyTimeoccursInDiet(Guid id)
+        {
+            return await _context.MealDietLists.Where(x => x.MealId == id).CountAsync();
+        }
+
+        public async Task<List<IndexViewModel>> GetDietList()
+        {
+            var dataList = await _context.Meals.ToListAsync();
+            var mealList = new List<IndexViewModel>();
+            foreach (var item in dataList)
+            {
+                var temp = new IndexViewModel
+                {
+                    HowManyTimeoccursInDiet = await HowManyTimeoccursInDiet(item.MealId),
+                    MealId = item.MealId,
+                    MealName = item.MealName,
+                    MealType = item.MealType,
+                    Components = item.Components
+                };
+                mealList.Add(temp);
+            }
+
+            return mealList;
+        }
+
         // GET: Meals
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Meals.ToListAsync());
+            return View(await GetDietList());
         }
 
         // GET: Meals/Details/5
