@@ -1,4 +1,6 @@
 ﻿$('#IndexTable').DataTable({
+    "lengthMenu": [5, 10, 25, 50, 75, 100],
+    "pagingType": "full_numbers",
     language: {
         processing: "Przetwarzanie",
         search: "Szukaj:",
@@ -19,7 +21,6 @@
         aria: {
             sortAscending: ": Aktywne sortowanie rosnąco",
             sortDescending: ": Aktywne sortowanie malejąco"
-        },
-        
+        }
     }
 });
