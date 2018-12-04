@@ -179,7 +179,7 @@ namespace inzynierka.Migrations
 
                     b.Property<DateTime>("AddedDataTime");
 
-                    b.Property<string>("Describe");
+                    b.Property<string>("Description");
 
                     b.Property<string>("DietName");
 

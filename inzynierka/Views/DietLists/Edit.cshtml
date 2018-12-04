@@ -1,38 +1,100 @@
 ﻿@model inzynierka.Models.DietListViewModels.EditViewModel
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Edytuj Diete";
 }
 
-<h2>Edit</h2>
-
-<h4>DietList</h4>
+<h2>Edytuj</h2>
+<h4>Dietę</h4>
 <hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Edit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="DietListId" />
+
+<form asp-action="Edit">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <input type="hidden" asp-for="DietListId" />
+    <div class="row">
+        <div class="col-md-offset-2 col-md-4">
             <div class="form-group">
                 <label asp-for="DietName" class="control-label"></label>
                 <input asp-for="DietName" class="form-control" />
                 <span asp-validation-for="DietName" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Describe" class="control-label"></label>
-                <textarea asp-for="Describe" class="form-control Text-area"></textarea>
-                <span asp-validation-for="Describe" class="text-danger"></span>
-            </div>
-            <div class="form-group">
                 <button type="submit" value="Create" class="btn btn-default">Edytuj diete</button> |
                 <a asp-action="Index" class="btn btn-default">Poprzednie menu</a>
             </div>
-        </form>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label asp-for="Description" class="control-label"></label>
+                <textarea asp-for="Description" class="form-control Text-area"></textarea>
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+        </div>
     </div>
-</div>
-
-
+    <table class="table" id="IndexTable">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Meals[0].MealName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Meals[0].MealType)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Meals[0].Components)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Meals[0].IsInDiet)
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (var i = 0; i < Model.Meals.Count; i++)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => Model.Meals[i].MealName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => Model.Meals[i].MealType)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => Model.Meals[i].Components)
+                    </td>
+                    <td>
+                        @Html.CheckBoxFor(modelItem => Model.Meals[i].IsInDiet)
+                        @(Model.Meals[i].IsInDiet ? "Tak" : "Nie")
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    @for (var i = 0; i < Model.Meals.Count; i++)
+    {
+        @Html.HiddenFor(modelItem => Model.Meals[i].MealName)
+        @Html.HiddenFor(modelItem => Model.Meals[i].MealType)
+        @Html.HiddenFor(modelItem => Model.Meals[i].Components)
+        @Html.HiddenFor(modelItem => Model.Meals[i].MealId)
+    }
+</form>
+@section head {
+    <link href="~/css/Datatable.css" rel="stylesheet" />
+}
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script src="~/js/EditDietListInit.js"></script>
+    <script src="~/js/Datatable.js"></script>
+    <script src="~/js/ButifyEditDietListTable.js"></script>
+    <script>
+        $("tbody").on("change", TransportValue);
+        function TransportValue(event) {
+            if ($(event.target).is(':checked')) {
+                $(`input:hidden[name='${event.target.name}']`).val("true");
+            } else {
+                $(`input:hidden[name='${event.target.name}']`).val("false");
+            }    
+        }
+    </script>
 }
+

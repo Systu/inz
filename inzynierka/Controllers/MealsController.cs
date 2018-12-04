@@ -79,12 +79,19 @@ namespace inzynierka.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("MealId,MealName,MealType,Components,DietListId")] Meal meal)
+        public async Task<IActionResult> Create(CreateViewModel meal)
         {
             if (ModelState.IsValid)
             {
                 meal.MealId = Guid.NewGuid();
-                _context.Add(meal);
+                var data = new Meal()
+                {
+                    Components = meal.Components,
+                    MealId = meal.MealId,
+                    MealName = meal.MealName,
+                    MealType = meal.MealType
+                };
+                _context.Add(data);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
@@ -104,7 +111,14 @@ namespace inzynierka.Controllers
             {
                 return NotFound();
             }
-            return View(meal);
+            var model = new EditViewModel()
+            {
+                Components = meal.Components,
+                MealId = meal.MealId,
+                MealName = meal.MealName,
+                MealType = meal.MealType
+            };
+            return View(model);
         }
 
         // POST: Meals/Edit/5
@@ -112,8 +126,9 @@ namespace inzynierka.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(Guid id, [Bind("MealId,MealName,MealType,Components,DietListId")] Meal meal)
+        public async Task<IActionResult> Edit(Guid id, EditViewModel meal)
         {
+            
             if (id != meal.MealId)
             {
                 return NotFound();
@@ -123,7 +138,14 @@ namespace inzynierka.Controllers
             {
                 try
                 {
-                    _context.Update(meal);
+                    var model = new Meal
+                    {
+                        Components = meal.Components,
+                        MealId = meal.MealId,
+                        MealName = meal.MealName,
+                        MealType = meal.MealType
+                    };
+                    _context.Update(model);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)

@@ -11,7 +11,7 @@ namespace inzynierka.Models
         public string DietName { get; set; }
         
         public DateTime AddedDataTime { get; set; }
-        public string Describe { get; set; }
+        public string Description { get; set; }
 
         public List<MealDietList> MealDietList { get; set; }
     }

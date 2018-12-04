@@ -1,12 +1,12 @@
-﻿@model inzynierka.Models.Meal
+﻿@model inzynierka.Models.MealViewModels.CreateViewModel
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Stwórz posiłek";
 }
 
-<h2>Create</h2>
+<h2>Swórzt</h2>
 
-<h4>Meal</h4>
+<h4>Posiłek</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -14,12 +14,21 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="MealName" class="control-label"></label>
-                <input asp-for="MealName" class="form-control" />
+                <input asp-for="MealName" class="form-control">
+                <span asp-validation-for="MealName" class="text-danger"></span>    
+                
                 <span asp-validation-for="MealName" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="MealType" class="control-label"></label>
-                <input asp-for="MealType" class="form-control" />
+                <select asp-for="MealType" class="form-control">
+                    <option selected disabled >Wybierz typ posiłku</option>
+                    <option value="Śniadanie">Śniadanie</option>
+                    <option value="Drugie śniadanie">Drugie śniadanie</option>
+                    <option value="Obiad">Obiad</option>
+                    <option value="Podwieczorek">Podwieczorek</option>
+                    <option value="Kolacja">Kolacja</option>
+                </select>
                 <span asp-validation-for="MealType" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -28,19 +37,13 @@
                 <span asp-validation-for="Components" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="DietListId" class="control-label"></label>
-                <select asp-for="DietListId" class ="form-control" asp-items="ViewBag.DietListId"></select>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <button type="submit" value="Create" class="btn btn-default">Dodaj posiłek</button> |
+                <a asp-action="Index" class="btn btn-default">Poprzednie menu</a>
             </div>
         </form>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

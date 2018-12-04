@@ -235,7 +235,7 @@ namespace inzynierka.Controllers
             }
             else
             {
-                return RedirectToAction("Index", "Index");
+                return RedirectToAction("Index", "Dieticians");
             }
         }
 

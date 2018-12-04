@@ -1,30 +1,74 @@
-﻿@model inzynierka.Models.DietList
+﻿@model inzynierka.Models.DietListViewModels.DetailsViewModels
 
 @{
     ViewData["Title"] = "Details";
 }
 
-<h2>Details</h2>
+<h2>Szczegóły</h2>
 
 <div>
-    <h4>DietList</h4>
+    <h4>Diety</h4>
     <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.DietName)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.DietName)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.AddedDataTime)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.AddedDataTime)
-        </dd>
-    </dl>
+    <div class="row">
+        <div class="col-md-4 col-md-offset-2">
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => model.DietName)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.DietName)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.AddedDataTime)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.AddedDataTime)
+                </dd>
+            </dl>
+            <div class="form-group">
+                <a asp-action="Edit" asp-route-id="@Model.DietListId" class="btn btn-default">Edytuj diete</a> |
+                <a asp-action="Index" class="btn btn-default">Poprzednie menu</a>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <label asp-for="Description" class="control-label"></label>
+            @Html.DisplayFor(x=>x.Description)
+        </div>
+    </div>
 </div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model.DietListId">Edit</a> |
-    <a asp-action="Index">Back to List</a>
-</div>
+<table class="table" id="IndexTable">
+    <thead>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Meals[0].MealName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Meals[0].MealType)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Meals[0].Components)
+        </th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model.Meals)
+    {
+        <tr>
+            <td>@Html.DisplayFor(modelItem => item.MealName)</td>
+            <td>@Html.DisplayFor(modelItem => item.MealType)</td>
+            <td>@Html.DisplayFor(modelItem => item.Components)</td>
+        </tr>
+    }
+    </tbody>
+</table>
+@section head {
+    <link href="~/css/Datatable.css" rel="stylesheet" />
+}
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script src="~/js/Datatable.js"></script>
+    <script src="~/js/ButifyEditDietListTable.js"></script>
+}
+
+

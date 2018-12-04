@@ -93,8 +93,27 @@ namespace inzynierka.Controllers
             {
                 return NotFound();
             }
+            var mealsInDiet = await _context.MealDietLists.Where(x => x.DietListId == id).ToListAsync();
+            var meals = await _context.Meals.ToListAsync();
+            var modelList = (from meal in meals
+                from mealDietList in mealsInDiet
+                where meal.MealId == mealDietList.MealId
+                select new DetailsViewModels.MealInDiet
+                {
+                    Components = meal.Components,
+                    MealId = meal.MealId,
+                    MealName = meal.MealName,
+                    MealType = meal.MealType
+                }).ToList();
 
-            return View(dietList);
+            var model = new DetailsViewModels
+            {
+                DietName = dietList.DietName,
+                DietListId = dietList.DietListId,
+                Description = dietList.Description,
+                Meals = modelList
+            };
+            return View(model);
         }
 
         // GET: DietLists/Create
@@ -117,7 +136,7 @@ namespace inzynierka.Controllers
                 var saveItem = new DietList
                 {
                     AddedDataTime = dietList.AddeDateTime,
-                    Describe = dietList.Describe,
+                    Description = dietList.Describe,
                     DietListId = dietList.DietListId,
                     DietName = dietList.DietName
                 };
@@ -143,11 +162,31 @@ namespace inzynierka.Controllers
                 return NotFound();
             }
 
-            var model = new EditViewModel()
+            var mealsInDiet = await _context.MealDietLists.Where(x => x.DietListId == id).ToListAsync();
+            var meals = await _context.Meals.ToListAsync();
+            var modelList = meals.Select(item => new EditViewModel.MealInDiet
             {
+                Components = item.Components,
+                IsInDiet = false,
+                MealId = item.MealId,
+                MealName = item.MealName,
+                MealType = item.MealType
+            }).ToList();
+            foreach (var item in modelList)
+            {
+                foreach (var temp in mealsInDiet)
+                {
+                    if (item.MealId == temp.MealId)
+                        item.IsInDiet = true;
+                }
+            }
+
+            var model = new EditViewModel
+            {
+                DietName = dietList.DietName,
                 DietListId = dietList.DietListId,
-                Describe = dietList.Describe,
-                DietName = dietList.DietName
+                Description = dietList.Description,
+                Meals = modelList
             };
             return View(model);
         }
@@ -168,7 +207,13 @@ namespace inzynierka.Controllers
             {
                 try
                 {
-                    _context.Update(dietList);
+                    var model = new DietList
+                    {
+                        Description = dietList.Description,
+                        DietListId = dietList.DietListId,
+                        DietName = dietList.DietName
+                    };
+                    _context.Update(model);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
@@ -205,7 +250,7 @@ namespace inzynierka.Controllers
             var model = new DeleteViewModel
             {
                 DietListId = dietList.DietListId,
-                Describe = dietList.Describe,
+                Describe = dietList.Description,
                 DietName = dietList.DietName,
                 AddedTime = dietList.AddedDataTime
             };

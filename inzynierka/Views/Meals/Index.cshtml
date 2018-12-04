@@ -3,14 +3,15 @@
 @{
     ViewData["Title"] = "Lista posiłków";
 }
+<div class="row"> 
+<div class="col-md-6">
+    <h2>Lista posiłków</h2>
 
-<h2>Lista posiłków</h2>
-
-<p>
-    <a asp-action="Create" class="btn btn-default">Dodaj nowy posiłek</a>
-</p>
-<table class="table" id="IndexTable">
-    <thead>
+    <p>
+        <a asp-action="Create" class="btn btn-default">Dodaj nowy posiłek</a>
+    </p>
+    <table class="table" id="IndexTable">
+        <thead>
         <tr>
             <th>
                 @Html.DisplayNameFor(model => model[0].MealName)
@@ -26,8 +27,8 @@
             </th>
             <th></th>
         </tr>
-    </thead>
-    <tbody>
+        </thead>
+        <tbody>
         @foreach (var item in Model)
         {
             <tr>
@@ -44,15 +45,19 @@
                     @Html.DisplayFor(modelItem => item.HowManyTimeoccursInDiet)
                 </td>
                 <td>
-                    <a asp-action="Edit" asp-route-id="@item.MealId">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.MealId">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.MealId">Delete</a>
+                    <a asp-action="Edit" asp-route-id="@item.MealId">Edytuj</a>
+                    <!-- <a asp-action="Details" asp-route-id="@item.MealId">Szczegóły</a> -->
+                    <a asp-action="Delete" asp-route-id="@item.MealId">Usuń</a>
                 </td>
             </tr>
         }
-    </tbody>
-</table>
-
+        </tbody>
+    </table>
+</div>
+    <div class="col-md-5 col-md-offset-1">
+        tutaj beda szczegóły
+    </div>
+</div>
 @section head {
     <link href="~/css/Datatable.css" rel="stylesheet" />
 }

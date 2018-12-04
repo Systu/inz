@@ -4,21 +4,16 @@ using System.Collections.Generic;
 
 namespace inzynierka.Migrations
 {
-    public partial class AddedDescribeToDietList : Migration
+    public partial class FixedTypo : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.AddColumn<string>(
-                name: "Description",
-                table: "DietLists",
-                nullable: true);
+
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropColumn(
-                name: "Description",
-                table: "DietLists");
+
         }
     }
 }
